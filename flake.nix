@@ -24,17 +24,22 @@
               LAB_OPERATOR_MAC = "52:54:00:00:00:20";
               LAB_USER = "rat";
               LAB_PASS = "rat";
+              LAB_DOCKER_IMG = "rockylinux/rockylinux:10";
+              LAB_DOCKER_IMG_NAME = "rockylinux10-dev";
             };
             packages = with pkgs; [
               qemu
               iptables
               cdrkit
               openssl_oqs
+              docker
               (writeShellScriptBin "mkdisks" (builtins.readFile ./scripts/mkdisks.sh))
               (writeShellScriptBin "mkseed" (builtins.readFile ./scripts/mkseed.sh))
               (writeShellScriptBin "net" (builtins.readFile ./scripts/net.sh))
               (writeShellScriptBin "target" (builtins.readFile ./scripts/target.sh))
               (writeShellScriptBin "operator" (builtins.readFile ./scripts/operator.sh))
+              (writeShellScriptBin "build" (builtins.readFile ./scripts/build.sh))
+              (writeShellScriptBin "mkdocker" (builtins.readFile ./scripts/mkdocker.sh))
             ];
           };
         });
