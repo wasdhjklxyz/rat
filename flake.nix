@@ -40,6 +40,7 @@
               (writeShellScriptBin "operator" (builtins.readFile ./scripts/operator.sh))
               (writeShellScriptBin "build" (builtins.readFile ./scripts/build.sh))
               (writeShellScriptBin "mkdocker" (builtins.readFile ./scripts/mkdocker.sh))
+              (writeShellScriptBin "deploy" (builtins.readFile ./scripts/deploy.sh))
             ];
           };
         });

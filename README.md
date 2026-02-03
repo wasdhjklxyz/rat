@@ -9,7 +9,8 @@ net up               # bridge up, airgapped
 target &             # boots to login in ~30s
 operator &           # same
 
-build                # build using rocky docker image
+build                # build binary
+deploy               # move binary to vm
 
 ssh rat@10.10.10.10  # target
 ssh rat@10.10.10.20  # operator
