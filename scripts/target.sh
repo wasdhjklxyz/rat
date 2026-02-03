@@ -13,6 +13,7 @@ ip link show "$BRIDGE" &>/dev/null || { echo "run: net up" >&2; exit 1; }
 [[ -f "$SEED" ]] || { echo "run: mkseed target" >&2; exit 1; }
 
 qemu-system-x86_64 \
+  -machine q35 \
   -enable-kvm \
   -m 4G \
   -cpu host \
