@@ -28,6 +28,7 @@ PUBKEY=$(cat ~/.ssh/id_ed25519.pub 2>/dev/null || cat ~/.ssh/id_rsa.pub 2>/dev/n
 
 cat > "$META/user-data" <<EOF
 #cloud-config
+ssh_pwauth: true
 users:
   - name: $USER
     sudo: ALL=(ALL) NOPASSWD:ALL
