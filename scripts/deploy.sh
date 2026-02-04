@@ -5,13 +5,15 @@ set -euo pipefail
 TARGET="${LAB_TARGET_IP:?}"
 OPERATOR="${LAB_OPERATOR_IP:?}"
 USER="${LAB_USER:?}"
-WHO="${1:?usage: deploy <target|operator> <binary>}"
-OUT="${2:?usage: deploy <target|operator> <binary>}"
+SSH_KEY="${LAB_SSH_KEY:?}"
 
-case "$WHO" in
-  target)   IP="${LAB_TARGET_IP:?}" ;;
-  operator) IP="${LAB_OPERATOR_IP:?}" ;;
-  *)        echo "unknown: $WHO" >&2; exit 1 ;;
-esac
+deploy() {
+  local out="build/$1"
+  local scp_cmd=(scp)
+  [[ -f "$SSH_KEY" ]] && scp_cmd+=(-i "$SSH_KEY")
+  [[ -f "$out" ]] && "${scp_cmd[@]}" "$out" "$USER@$2:~/"
+  [[ -f "${out}_debug" ]] && "${scp_cmd[@]}" "${out}_debug" "$USER@$2:~/"
+}
 
-scp "$OUT" "$USER@$IP:~/"
+deploy "agent" "$TARGET"
+deploy "c2" "$OPERATOR"
