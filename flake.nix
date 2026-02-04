@@ -26,6 +26,7 @@
               LAB_PASS = "rat";
               LAB_DOCKER_IMG = "rockylinux/rockylinux:10";
               LAB_DOCKER_IMG_NAME = "rockylinux10-dev";
+              LAB_SSH_KEY = "./disks/ssh_ed25519";
             };
             packages = with pkgs; [
               qemu

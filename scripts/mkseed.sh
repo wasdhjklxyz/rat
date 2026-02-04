@@ -7,6 +7,7 @@ NAME="${1:?usage: mkseed <target|operator>}"
 USER="${LAB_USER:?}"
 PASS="${LAB_PASS:?}"
 GATEWAY="${LAB_GATEWAY:?}"
+SSH_KEY="${LAB_SSH_KEY:?}"
 
 case "$NAME" in
   target)   IP="${LAB_TARGET_IP:?}" ;;
@@ -24,7 +25,11 @@ local-hostname: $NAME
 EOF
 
 HASH=$(openssl passwd -6 "$PASS")
-PUBKEY=$(cat ~/.ssh/id_ed25519.pub 2>/dev/null || cat ~/.ssh/id_rsa.pub 2>/dev/null || echo "")
+
+if [[ ! -f "$SSH_KEY" ]]; then
+  ssh-keygen -t ed25519 -f "$SSH_KEY" -N "" -q
+fi
+PUBKEY=$(cat "${SSH_KEY}.pub")
 
 cat > "$META/user-data" <<EOF
 #cloud-config
