@@ -6,6 +6,10 @@
 #include <unistd.h>
 #include <string.h>
 
+#ifndef C2_PORT
+#define C2_PORT 0
+#endif
+
 int create_socket(uint16_t port)
 {
 	int sock, ret;
@@ -69,7 +73,7 @@ int main(void)
 	ssize_t rd_bytes;
 	char buf[64];
 
-	sk_listen = create_socket(7777);
+	sk_listen = create_socket(C2_PORT);
 	if (sk_listen < 0) {
 		return 1;
 	}

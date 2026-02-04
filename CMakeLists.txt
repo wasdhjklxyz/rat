@@ -5,6 +5,9 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
 endif()
 
+set(C2_HOST "" CACHE STRING "C2 host")
+set(C2_PORT "" CACHE STRING "C2 port")
+
 add_executable(agent)
 add_executable(c2)
 add_library(compile_options INTERFACE)
@@ -20,6 +23,11 @@ set_target_properties(agent PROPERTIES
   OUTPUT_NAME "agent$<$<CONFIG:Debug>:_debug>")
 set_target_properties(c2 PROPERTIES
   OUTPUT_NAME "c2$<$<CONFIG:Debug>:_debug>")
+
+target_compile_definitions(agent PRIVATE
+  C2_PORT=${C2_PORT}
+  C2_HOST=\"${C2_HOST}\")
+target_compile_definitions(c2 PRIVATE C2_PORT=${C2_PORT})
 
 target_link_libraries(agent PRIVATE compile_options)
 target_link_libraries(c2 PRIVATE compile_options)

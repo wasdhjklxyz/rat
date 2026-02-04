@@ -7,6 +7,14 @@
 #include <string.h>
 #include <arpa/inet.h>
 
+#ifndef C2_PORT
+#define C2_PORT 0
+#endif // C2_PORT
+
+#ifndef C2_HOST
+#define C2_HOST "0.0.0.0"
+#endif // C2_HOST
+
 int create_socket(const char *host, uint16_t port)
 {
 	int sock, ret;
@@ -69,7 +77,7 @@ int main(void)
 	ssize_t wr_bytes;
 	const char msg[] = "hello, world!";
 
-	sk = create_socket("10.10.10.20", 7777);
+	sk = create_socket(C2_HOST, C2_PORT);
 	if (sk < 0) {
 		return 1;
 	}

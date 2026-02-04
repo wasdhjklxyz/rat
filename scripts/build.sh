@@ -12,4 +12,8 @@ case "${1:-}" in
 esac
 
 docker run --rm -v "$(pwd)":/src -w /src "$NAME" \
-  sh -c "cmake -B build $BUILD_TYPE && cmake --build build"
+  sh -c "cmake -B build \
+    $BUILD_TYPE \
+    -DC2_PORT=${LAB_C2_PORT:-} \
+    -DC2_HOST=\"${LAB_OPERATOR_IP:-}\" \
+    && cmake --build build"
