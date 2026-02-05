@@ -32,5 +32,5 @@ target_compile_definitions(c2 PRIVATE C2_PORT=${C2_PORT})
 target_link_libraries(agent PRIVATE compile_options)
 target_link_libraries(c2 PRIVATE compile_options)
 
-target_sources(agent PRIVATE src/agent.c)
-target_sources(c2 PRIVATE src/c2.c)
+target_sources(agent PRIVATE src/agent/main.c)
+target_sources(c2 PRIVATE src/c2/main.c)
