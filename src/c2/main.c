@@ -2,7 +2,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-#include "socket.h"
+#include "net.h"
 
 int main(void)
 {
