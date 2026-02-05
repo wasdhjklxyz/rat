@@ -8,7 +8,7 @@ USER="${LAB_USER:?}"
 SSH_KEY="${LAB_SSH_KEY:?}"
 
 deploy() {
-  local out="build/$1"
+  local out="build/src/$1/$1"
   local scp_cmd=(scp)
   [[ -f "$SSH_KEY" ]] && scp_cmd+=(-i "$SSH_KEY")
   [[ -f "$out" ]] && "${scp_cmd[@]}" "$out" "$USER@$2:~/"
