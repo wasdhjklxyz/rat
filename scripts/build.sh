@@ -17,3 +17,6 @@ docker run --rm -v "$(pwd)":/src -w /src "$NAME" \
     -DC2_PORT=${LAB_C2_PORT:-} \
     -DC2_HOST=\"${LAB_OPERATOR_IP:-}\" \
     && cmake --build build"
+
+sudo chown -R $USER build
+sed -i 's/\/src\/src/src/g' ./build/compile_commands.json

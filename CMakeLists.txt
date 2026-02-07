@@ -5,6 +5,8 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type" FORCE)
 endif()
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 set(C2_HOST "" CACHE STRING "C2 host")
 set(C2_PORT "" CACHE STRING "C2 port")
 
